@@ -1,4 +1,4 @@
-package calls
+package models
 
 import (
 	"time"
@@ -18,5 +18,8 @@ type ContactModel struct {
 }
 
 func MigrateSchema(db *gorm.DB) {
-	db.AutoMigrate(ContactModel{})
+	err := db.AutoMigrate(ContactModel{})
+	if err != nil {
+		panic(err)
+	}
 }

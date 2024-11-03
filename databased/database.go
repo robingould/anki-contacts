@@ -11,7 +11,7 @@ type Database struct {
 
 var globalDBPointer *gorm.DB
 
-func initializeDB() *gorm.DB {
+func InitializeDatabase() *gorm.DB {
 	dbStringInput := "root:password@tcp(127.0.0.1:3306)/contacts?charset=utf8mb4&parseTime=True&loc=Local"
 	initializedDBPointer, gormError := gorm.Open(mysql.Open(dbStringInput), &gorm.Config{})
 
@@ -22,6 +22,6 @@ func initializeDB() *gorm.DB {
 	return initializedDBPointer
 }
 
-func getDB() *gorm.DB {
+func GetDB() *gorm.DB {
 	return globalDBPointer
 }
