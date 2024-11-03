@@ -1,5 +1,4 @@
-@for (contact of contactList; track contact.ID) {
-<div className="container {{ contact.ID }}">
+<div className="container" *ngFor="let contact of contactList">
   <hr />
   <p>{{ contact.FirstName }} {{ contact.LastName }}</p>
   <ul>
@@ -10,4 +9,3 @@
   </ul>
   <hr />
 </div>
-}

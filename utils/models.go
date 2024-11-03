@@ -1,6 +1,7 @@
-package models
+package utils
 
 import (
+	"anki-contacts/databased"
 	"time"
 
 	"gorm.io/gorm"
@@ -22,4 +23,25 @@ func MigrateSchema(db *gorm.DB) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func CreateContact() error {
+	return nil
+}
+
+func ReadAllContacts() ([]ContactModel, error) {
+	db := databased.GetDB()
+	var contacts []ContactModel
+	tx := db.Begin()
+	tx.Find(&contacts)
+
+	return contacts, tx.Error
+}
+
+func UpdateContact() error {
+	return nil
+}
+
+func DeleteContact() error {
+	return nil
 }

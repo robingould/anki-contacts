@@ -2,15 +2,17 @@ package main
 
 import (
 	"anki-contacts/databased"
-	"anki-contacts/models"
+	"anki-contacts/utils"
 	"fmt"
 	"log"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	db := databased.InitializeDatabase()
-	models.MigrateSchema(db)
+	utils.MigrateSchema(db)
 
 	fmt.Println("Contacts table successfully created!")
 
@@ -28,7 +30,7 @@ func main() {
 	phoneB := "+9876543210"
 	birthdayB := time.Date(2000, time.December, 2, 2, 2, 0, 0, time.UTC)
 
-	contacts := []*models.ContactModel{
+	contacts := []*utils.ContactModel{
 		{
 			FirstName:     "Alice",
 			LastName:      "Glassoline",
@@ -56,4 +58,12 @@ func main() {
 	fmt.Print("rows affected: ")
 	fmt.Println(result.RowsAffected) // returns inserted records count
 
+	r := gin.Default()
+
+	r.POST("/contacts", utils.ContactCreate)
+	r.GET("/contacts", utils.ContactsRetrieve)
+	r.PUT("/contacts/:id", utils.ContactUpdate)
+	r.DELETE("/contacts/:id", utils.ContactDelete)
+
+	r.Run(":8080")
 }
