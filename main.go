@@ -56,7 +56,7 @@ func main() {
 	}
 
 	fmt.Print("rows affected: ")
-	fmt.Println(result.RowsAffected) // returns inserted records count
+	fmt.Println(result.RowsAffected) // print inserted records count
 
 	r := gin.Default()
 

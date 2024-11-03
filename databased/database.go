@@ -19,7 +19,9 @@ func InitializeDatabase() *gorm.DB {
 		panic(gormError)
 	}
 
-	return initializedDBPointer
+	globalDBPointer = initializedDBPointer
+
+	return globalDBPointer
 }
 
 func GetDB() *gorm.DB {
