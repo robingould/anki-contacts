@@ -1,4 +1,4 @@
-module anki-contacts
+module github.com/robingould/anki-contacts
 
 go 1.23.2
 
