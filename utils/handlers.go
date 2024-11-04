@@ -30,16 +30,16 @@ func ContactsRetrieve(c *gin.Context) {
 // ContactRetrieve is the handler for retrieving a single contact by id
 func ContactRetrieveByID(c *gin.Context) {
 	// base 10, 32 bit integer
-	id, convertErr := strconv.ParseUint(c.Param("id"), 10, 32)
-	if convertErr != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failure to parse ID as Uint!"})
+	id, parseUintError := strconv.ParseUint(c.Param("id"), 10, 32)
+	if parseUintError != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failure to parse ID as Uint while trying to retrieve a single contact by ID!"})
 		return
 	}
 
 	contact, err := ReadContactByID(uint(id))
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Contact couldn't be reached!"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "Contact couldn't be reached!"})
 	}
 	c.JSON(http.StatusOK, contact)
 }
@@ -51,5 +51,15 @@ func ContactUpdate(c *gin.Context) {
 
 // ContactDelete is the handler for deleting a contact.
 func ContactDelete(c *gin.Context) {
-	fmt.Print("tried to delete a contact, but this functionality is not yet implemented!")
+	id, parseUintError := strconv.ParseUint(c.Param("id"), 10, 32)
+	if parseUintError != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failure to parse ID as Uint while trying to delete by ID!"})
+		return
+	}
+	err := DeleteContactByID(uint(id))
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Contact couldn't be reached for deletion!"})
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Successfully deleted contact!"})
 }

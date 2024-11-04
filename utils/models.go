@@ -59,7 +59,7 @@ func ReadAllContacts() ([]Contact, error) {
 	return contacts, tx.Error
 }
 
-// ReadContactByID retrieves a contact by a given ID
+// ReadContactByID retrieves a contact by uint ID
 func ReadContactByID(ID uint) (Contact, error) {
 	db := databased.Get()
 	var contact Contact
@@ -78,7 +78,9 @@ func UpdateContact() error {
 	return nil
 }
 
-// DeleteContact deletes a contact based on some condition. Currently unimplemented.
-func DeleteContact(condition interface{}) error {
-	return nil
+// DeleteContact deletes a contact by uint ID.
+func DeleteContactByID(ID uint) error {
+	db := databased.Get()
+	err := db.Where("id = ?", ID).Delete(Contact{}).Error
+	return err
 }
