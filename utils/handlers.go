@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,7 +12,21 @@ import (
 // ContactCreate is the handler for creating a new contact.
 func ContactCreate(c *gin.Context) {
 	// TODO need to check if contact request is valid format
-	fmt.Print("tried to create a contact, but this functionality is not yet implemented!")
+	var contact Contact
+	err := c.ShouldBindBodyWithJSON(&contact)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request format!"})
+		return
+	}
+	contact.CreatedAt = time.Now()
+
+	creationErr := CreateContact(&contact)
+	if creationErr != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to add new contact"})
+		return
+	}
+
+	c.JSON(http.StatusCreated, contact)
 }
 
 // ContactsRetrieve is the handler for retrieving stored contacts.
