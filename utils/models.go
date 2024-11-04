@@ -11,7 +11,7 @@ import (
 )
 
 // A Contact models a single contact.
-type ContactModel struct {
+type Contact struct {
 	// Primary key.
 	ID uint `gorm:"primaryKey"`
 	// The contact's given name.
@@ -33,7 +33,7 @@ type ContactModel struct {
 // MigrateSchema sets up the database schema necessary for the application to
 // function.
 func MigrateSchema(db databased.Database) {
-	err := db.AutoMigrate(ContactModel{})
+	err := db.AutoMigrate(Contact{})
 	if err != nil {
 		panic(err)
 	}
@@ -45,9 +45,9 @@ func CreateContact() error {
 }
 
 // ReadAllContacts retrieves all contacts from the database.
-func ReadAllContacts() ([]ContactModel, error) {
+func ReadAllContacts() ([]Contact, error) {
 	db := databased.New()
-	var contacts []ContactModel
+	var contacts []Contact
 	tx := db.Begin()
 	defer func() {
 		if err := tx.Rollback(); err != nil {

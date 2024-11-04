@@ -31,7 +31,7 @@ func main() {
 	phoneB := "+9876543210"
 	birthdayB := time.Date(2000, time.December, 2, 2, 2, 0, 0, time.UTC)
 
-	contacts := []*utils.ContactModel{
+	contacts := []*utils.Contact{
 		{
 			FirstName:     "Alice",
 			LastName:      "Glassoline",
