@@ -4,16 +4,16 @@ import { Contact } from '../models/contact';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ContactService {
-  private apiUrl = "http://localhost:8080"
+	private readonly apiUrl = "http://localhost:8080"
 
-  constructor(private http: HttpClient) { }
+	constructor(private readonly http: HttpClient) { }
 
-  public getContacts(): Observable<Contact[]> {
+	public getContacts(): Observable<Contact[]> {
 
-    return this.http.get<Contact[]>(`${this.apiUrl}/contacts`)
-  }
+		return this.http.get<Contact[]>(`${this.apiUrl}/contacts`)
+	}
 
 }
