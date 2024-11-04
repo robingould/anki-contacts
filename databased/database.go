@@ -1,3 +1,4 @@
+// Package databased handles data in a based way.
 package databased
 
 import (
@@ -5,13 +6,20 @@ import (
 	"gorm.io/gorm"
 )
 
+// Database represents a connection to the anki-contacts database.
 type Database struct {
 	*gorm.DB
 }
 
-var globalDBPointer *gorm.DB
+var globalDBPointer Database
 
-func InitializeDatabase() *gorm.DB {
+// New returns the shared database connection, opening it if that has not
+// already been done.
+func New() Database {
+	if globalDBPointer.DB != nil {
+		return globalDBPointer
+	}
+
 	dbStringInput := "root:password@tcp(127.0.0.1:3306)/contacts?charset=utf8mb4&parseTime=True&loc=Local"
 	initializedDBPointer, gormError := gorm.Open(mysql.Open(dbStringInput), &gorm.Config{})
 
@@ -19,11 +27,7 @@ func InitializeDatabase() *gorm.DB {
 		panic(gormError)
 	}
 
-	globalDBPointer = initializedDBPointer
+	globalDBPointer.DB = initializedDBPointer
 
-	return globalDBPointer
-}
-
-func GetDB() *gorm.DB {
 	return globalDBPointer
 }
