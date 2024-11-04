@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Contact } from '../../shared/models/contact';
-import { ContactService } from '../../shared/services/contact.service';
-import { CommonModule } from '@angular/common';
+import { Component, type OnInit } from "@angular/core";
+import type { Contact } from "../../shared/models/contact";
+import { ContactService } from "../../shared/services/contact.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-contact-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './contact-list.component.html',
-  styleUrl: './contact-list.component.css'
+	selector: "app-contact-list",
+	standalone: true,
+	imports: [CommonModule],
+	templateUrl: "./contact-list.component.html",
+	styleUrl: "./contact-list.component.css"
 })
 export class ContactListComponent implements OnInit {
-  contactList: Contact[] = [];
+	public contactList: Contact[] = [];
 
-  constructor(private contactService: ContactService) {
+	constructor(private readonly contactService: ContactService) {
 
-  }
+	}
 
-  async ngOnInit() {
-    this.contactService.getContacts()
-      .subscribe((data: Contact[]) => {
-        this.contactList = data;
-      }
-      )
-  };
+	public async ngOnInit(): Promise<void> {
+	this.contactService.getContacts().subscribe(
+		data => {
+			this.contactList = data;
+		}
+	);
+	};
 }
