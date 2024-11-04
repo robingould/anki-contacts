@@ -7,6 +7,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -58,12 +59,20 @@ func main() {
 	fmt.Print("rows affected: ")
 	fmt.Println(result.RowsAffected) // print inserted records count
 
-	r := gin.Default()
+	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:4200"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
-	r.POST("/contacts", utils.ContactCreate)
-	r.GET("/contacts", utils.ContactsRetrieve)
-	r.PUT("/contacts/:id", utils.ContactUpdate)
-	r.DELETE("/contacts/:id", utils.ContactDelete)
+	router.POST("/contacts", utils.ContactCreate)
+	router.GET("/contacts", utils.ContactsRetrieve)
+	router.PUT("/contacts/:id", utils.ContactUpdate)
+	router.DELETE("/contacts/:id", utils.ContactDelete)
 
-	r.Run(":8080")
+	router.Run(":8080")
 }
