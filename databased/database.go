@@ -13,7 +13,7 @@ type Database struct {
 
 var globalDBPointer Database
 
-// New returns the shared database connection, opening it if that has not
+// Get returns the shared database connection, opening it if that has not
 // already been done.
 func Get() Database {
 	if globalDBPointer.DB != nil {
