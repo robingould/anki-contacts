@@ -11,7 +11,6 @@ import (
 
 // ContactCreate is the handler for creating a new contact.
 func ContactCreate(c *gin.Context) {
-	// TODO need to check if contact request is valid format
 	var contact Contact
 	err := c.ShouldBindBodyWithJSON(&contact)
 	if err != nil {
