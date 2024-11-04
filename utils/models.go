@@ -46,7 +46,7 @@ func CreateContact() error {
 
 // ReadAllContacts retrieves all contacts from the database.
 func ReadAllContacts() ([]Contact, error) {
-	db := databased.New()
+	db := databased.Get()
 	var contacts []Contact
 	tx := db.Begin()
 	defer func() {

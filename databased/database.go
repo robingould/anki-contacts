@@ -15,7 +15,7 @@ var globalDBPointer Database
 
 // New returns the shared database connection, opening it if that has not
 // already been done.
-func New() Database {
+func Get() Database {
 	if globalDBPointer.DB != nil {
 		return globalDBPointer
 	}

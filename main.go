@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	db := databased.New()
+	db := databased.Get()
 	utils.MigrateSchema(db)
 
 	fmt.Println("Contacts table successfully created!")
