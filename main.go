@@ -71,6 +71,7 @@ func main() {
 
 	router.POST("/contacts", utils.ContactCreate)
 	router.GET("/contacts", utils.ContactsRetrieve)
+	router.GET("/contacts/:id", utils.ContactRetrieveByID)
 	router.PUT("/contacts/:id", utils.ContactUpdate)
 	router.DELETE("/contacts/:id", utils.ContactDelete)
 

@@ -39,8 +39,8 @@ func MigrateSchema(db databased.Database) {
 	}
 }
 
-// CreateContact creates a new contact. Currently unimplemented.
-func CreateContact() error {
+// CreateContact creates a new contact. Currently unimplemented
+func CreateContact(contact Contact) error {
 	return nil
 }
 
@@ -59,12 +59,26 @@ func ReadAllContacts() ([]Contact, error) {
 	return contacts, tx.Error
 }
 
+// ReadContactByID retrieves a contact by a given ID
+func ReadContactByID(ID uint) (Contact, error) {
+	db := databased.Get()
+	var contact Contact
+	tx := db.Begin()
+	defer func() {
+		if err := tx.Rollback(); err != nil {
+			fmt.Fprintf(os.Stderr, "rolling back transaction: %v\n", err)
+		}
+	}()
+	tx.Where("id = ?", ID).Find(&contact)
+	return contact, tx.Error
+}
+
 // UpdateContact updates a contact definition. Currently unimplemented.
 func UpdateContact() error {
 	return nil
 }
 
-// DeleteContact deletes a contact. Currently unimplemented.
-func DeleteContact() error {
+// DeleteContact deletes a contact based on some condition. Currently unimplemented.
+func DeleteContact(condition interface{}) error {
 	return nil
 }
