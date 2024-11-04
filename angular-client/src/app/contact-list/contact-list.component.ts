@@ -18,10 +18,19 @@ export class ContactListComponent implements OnInit {
 	}
 
 	public async ngOnInit(): Promise<void> {
-	this.contactService.getContacts().subscribe(
-		data => {
-			this.contactList = data;
-		}
-	);
+		this.contactService.getContacts().subscribe(
+			data => {
+				this.contactList = data;
+			}
+		);
+	};
+
+	deleteContact(contactID: number) {
+		this.contactService.deleteContact(contactID).subscribe(
+			() => {
+				this.contactList = this.contactList.filter(
+					contact => contact.ID !== contactID);
+			}
+		);
 	};
 }

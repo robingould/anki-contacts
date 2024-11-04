@@ -1,11 +1,18 @@
 <div className="container" *ngFor="let contact of contactList">
-  <hr />
-  <p>{{ contact.FirstName }} {{ contact.LastName }}</p>
-  <ul>
-    <li>email: {{ contact.Email }}</li>
-    <li>phone: {{ contact.PhoneNumber }}</li>
-    <li>birthday: {{ contact.Birthday }}</li>
-    <li>last contacted: {{ contact.LastContacted }}</li>
-  </ul>
-  <hr />
+	<hr />
+	<p>{{ contact.FirstName }} {{ contact.LastName }}</p>
+	<ul>
+		<li>email: {{ contact.Email }}</li>
+		<li>phone: {{ contact.PhoneNumber }}</li>
+		<li>birthday: {{ contact.Birthday }}</li>
+		<li>last contacted: {{ contact.LastContacted }}</li>
+	</ul>
+	<button
+		type="button"
+		className="delete-contact"
+		(click)="deleteContact(contact.ID)"
+	>
+		Delete Contact
+	</button>
+	<hr />
 </div>
