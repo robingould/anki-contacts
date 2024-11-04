@@ -52,6 +52,21 @@ func main() {
 
 	result := db.Create(contacts) // pass a slice to insert multiple rows
 
+	emailC := "yueah@waow.gov"
+	phoneC := "+11111111"
+	birthdayC := time.Date(1999, time.January, 2, 2, 2, 0, 0, time.UTC)
+
+	contactCreationDummy := utils.Contact{
+		FirstName:     "John",
+		LastName:      "Salamander",
+		Email:         &emailC,
+		PhoneNumber:   &phoneC,
+		Birthday:      &birthdayC,
+		LastContacted: time.Now(),
+	}
+
+	utils.CreateContact(&contactCreationDummy)
+
 	if result.Error != nil {
 		panic("failed to create example contacts")
 	}

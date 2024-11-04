@@ -40,8 +40,10 @@ func MigrateSchema(db databased.Database) {
 }
 
 // CreateContact creates a new contact. Currently unimplemented
-func CreateContact(contact Contact) error {
-	return nil
+func CreateContact(contact *Contact) error {
+	db := databased.Get()
+	err := db.Create(contact).Error
+	return err
 }
 
 // ReadAllContacts retrieves all contacts from the database.
