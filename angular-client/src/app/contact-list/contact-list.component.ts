@@ -26,11 +26,20 @@ export class ContactListComponent implements OnInit {
 	};
 
 	deleteContact(contactID: number) {
-		this.contactService.deleteContact(contactID).subscribe(
-			() => {
-				this.contactList = this.contactList.filter(
-					contact => contact.ID !== contactID);
+		const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID)
+		if (typeof (contact) === undefined) {
+			console.log("undefined contact")
+		} else {
+			const contactName = contact!.FirstName + " " + contact!.LastName
+
+			if (confirm("Are you sure to delete contact:" + " " + contactName + "?")) {
+				this.contactService.deleteContact(contactID).subscribe(
+					() => {
+						this.contactList = this.contactList.filter(
+							contact => contact.ID !== contactID);
+					}
+				);
 			}
-		);
+		}
 	};
 }
