@@ -14,6 +14,7 @@ func ContactCreate(c *gin.Context) {
 
 // ContactsRetrieve is the handler for retriveing stored contacts.
 func ContactsRetrieve(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	contactModels, err := ReadAllContacts()
 
 	if err != nil {
