@@ -3,4 +3,3 @@ import { AppComponent } from './app.component';
 
 export const routes: Routes = [
 ];
-
