@@ -1,14 +1,14 @@
-import { Component, type OnInit } from '@angular/core';
-import type { Contact } from '../../shared/models/contact';
-import { ContactService } from '../../shared/services/contact.service';
-import { CommonModule } from '@angular/common';
+import { Component, type OnInit } from "@angular/core";
+import type { Contact } from "../../shared/models/contact";
+import { ContactService } from "../../shared/services/contact.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
-	selector: 'app-contact-list',
+	selector: "app-contact-list",
 	standalone: true,
 	imports: [CommonModule],
-	templateUrl: './contact-list.component.html',
-	styleUrl: './contact-list.component.css'
+	templateUrl: "./contact-list.component.html",
+	styleUrl: "./contact-list.component.css"
 })
 export class ContactListComponent implements OnInit {
 	public contactList: Contact[] = [];
