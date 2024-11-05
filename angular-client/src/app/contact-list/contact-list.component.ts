@@ -14,34 +14,33 @@ import { Router } from "@angular/router";
 export class ContactListComponent implements OnInit {
 	public contactList: Contact[] = [];
 
-	constructor(private readonly contactService: ContactService, private router: Router) {
+constructor(private readonly contactService: ContactService, private router: Router) {
 
-	}
+}
 
-	public async ngOnInit(): Promise<void> {
-		this.contactService.getContacts().subscribe(
-			data => {
-				this.contactList = data;
-			}
-		);
-	};
+public async ngOnInit(): Promise<void> {
+	this.contactService.getContacts().subscribe(
+		data => {
+			this.contactList = data;
+		}
+	);
+};
 
-	editContact(contactID: number) {
-		this.router.navigate(["edit-contact", contactID])
-	}
+editContact(contactID: number) {
+	this.router.navigate(["edit-contact", contactID])
+}
 
-	deleteContact(contactID: number) {
-		const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID)
-		if (typeof (contact) === undefined) {
-			console.log("Undefined contact reached on frontend during deletion!")
-		} else {
-			const contactName = contact!.FirstName + " " + contact!.LastName
-
-			if (confirm("Are you sure to delete contact:" + " " + contactName + "?")) {
-				this.contactService.deleteContact(contactID).subscribe(
-					() => {
-						this.contactList = this.contactList.filter(
-							contact => contact.ID !== contactID);
+deleteContact(contactID: number) {
+	const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID)
+	if (typeof (contact) === undefined) {
+		console.log("Undefined contact reached on frontend during deletion!")
+	} else {
+		const contactName = contact!.FirstName + " " + contact!.LastName
+		if (confirm("Are you sure to delete contact:" + " " + contactName + "?")) {
+			this.contactService.deleteContact(contactID).subscribe(
+				() => {
+					this.contactList = this.contactList.filter(
+						contact => contact.ID !== contactID);
 					}
 				);
 			}

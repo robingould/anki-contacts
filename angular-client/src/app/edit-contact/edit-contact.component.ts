@@ -13,17 +13,15 @@ import { Contact } from "../../shared/models/contact";
 export class EditContactComponent implements OnInit {
 	public contactID = 0;
 
-	constructor(
-		private contactService: ContactService,
-		private route: ActivatedRoute
-	) {
+constructor(
+	private contactService: ContactService,
+	private route: ActivatedRoute
+) { }
 
-	}
-
-	ngOnInit() {
-		this.route.params.subscribe(async (params) => {
-			this.contactID = params["id"];
-			//this.contact = await this.contactService.getContact(contactID);
+ngOnInit() {
+	this.route.params.subscribe(async (params) => {
+		this.contactID = params["id"];
+		//this.contact = await this.contactService.getContact(contactID);
 		});
 	}
 }
