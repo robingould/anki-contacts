@@ -2,6 +2,7 @@ import { Component, type OnInit } from "@angular/core";
 import type { Contact } from "../../shared/models/contact";
 import { ContactService } from "../../shared/services/contact.service";
 import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-contact-list",
@@ -13,7 +14,7 @@ import { CommonModule } from "@angular/common";
 export class ContactListComponent implements OnInit {
 	public contactList: Contact[] = [];
 
-	constructor(private readonly contactService: ContactService) {
+	constructor(private readonly contactService: ContactService, private router: Router) {
 
 	}
 
@@ -24,6 +25,9 @@ export class ContactListComponent implements OnInit {
 			}
 		);
 	};
+	editContact(contact: Contact) {
+		this.router.navigate(["edit-contact", contact])
+	}
 
 	deleteContact(contactID: number) {
 		const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID)

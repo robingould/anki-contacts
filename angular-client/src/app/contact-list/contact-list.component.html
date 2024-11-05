@@ -8,6 +8,9 @@
 		<li>birthday: {{ contact.Birthday }}</li>
 		<li>last contacted: {{ contact.LastContacted }}</li>
 	</ul>
+	<button type="button" className="edit-contact" (click)="editContact(contact)">
+		Edit Contact
+	</button>
 	<button
 		type="button"
 		className="delete-contact"
