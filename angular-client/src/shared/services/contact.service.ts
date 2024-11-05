@@ -23,6 +23,10 @@ export class ContactService {
 		return this.http.get<Contact[]>(`${this.apiUrl}/contacts`)
 	}
 
+	public updateContact(contact: Contact): Observable<Contact> {
+		return this.http.put<Contact>(`${this.apiUrl}/contacts`, { contact }.contact)
+	}
+
 	public deleteContact(id: number): Observable<Contact> {
 		return this.http.delete<Contact>(`${this.apiUrl}/contacts/${id}`)
 	}
