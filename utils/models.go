@@ -39,7 +39,7 @@ func MigrateSchema(db databased.Database) {
 	}
 }
 
-// CreateContact creates a new contact. Currently unimplemented
+// CreateContact creates a new contact.
 func CreateContact(contact *Contact) error {
 	db := databased.Get()
 	err := db.Create(contact).Error
