@@ -75,9 +75,11 @@ func ReadContactByID(ID uint) (Contact, error) {
 	return contact, tx.Error
 }
 
-// UpdateContact updates a contact definition. Currently unimplemented.
-func UpdateContact() error {
-	return nil
+// UpdateContactByID updates a contact definition.
+func (contact *Contact) UpdateContactByID(contactUpdate Contact) error {
+	db := databased.Get()
+	err := db.Model(contact).Updates(contactUpdate).Error
+	return err
 }
 
 // DeleteContact deletes a contact by uint ID.

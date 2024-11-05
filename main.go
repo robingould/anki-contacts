@@ -67,6 +67,11 @@ func main() {
 
 	utils.CreateContact(&contactCreationDummy)
 
+	contactCreationDummy.FirstName = "Alp"
+
+	testUpdatableContact, _ := utils.ReadContactByID(3)
+	testUpdatableContact.UpdateContactByID(contactCreationDummy)
+
 	if result.Error != nil {
 		panic("failed to create example contacts")
 	}
