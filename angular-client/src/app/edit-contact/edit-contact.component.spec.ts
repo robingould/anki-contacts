@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { EditContactComponent } from "./edit-contact.component";
 
 describe("EditContactComponent", () => {
-  let component: EditContactComponent;
-  let fixture: ComponentFixture<EditContactComponent>;
+	let component: EditContactComponent;
+	let fixture: ComponentFixture<EditContactComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [EditContactComponent]
-    })
-      .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [EditContactComponent]
+		})
+			.compileComponents();
 
-    fixture = TestBed.createComponent(EditContactComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(EditContactComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+	it("should create", () => {
+		expect(component).toBeTruthy();
+	});
 });
