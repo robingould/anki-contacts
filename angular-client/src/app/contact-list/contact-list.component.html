@@ -1,4 +1,5 @@
-<div className="container" *ngFor="let contact of contactList">
+<a href="/add-contact">Add Contact</a>
+<div className="contacts-container" *ngFor="let contact of contactList">
 	<hr />
 	<p>{{ contact.FirstName }} {{ contact.LastName }}</p>
 	<ul>
@@ -10,7 +11,7 @@
 	<button
 		type="button"
 		className="delete-contact"
-		(click)="deleteContact(contact.ID)"
+		(click)="deleteContact(contact.ID!)"
 	>
 		Delete Contact
 	</button>
