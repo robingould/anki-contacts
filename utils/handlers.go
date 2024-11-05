@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -60,7 +59,22 @@ func ContactRetrieveByID(c *gin.Context) {
 
 // ContactUpdate is the handler for updating a contact.
 func ContactUpdate(c *gin.Context) {
-	fmt.Print("tried to update a contact, but this functionality is not yet implemented!")
+	id, parseUintError := strconv.ParseUint(c.Param("id"), 10, 32)
+	if parseUintError != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failure to parse ID as Uint while trying to update by ID!"})
+		return
+	}
+	var contactUpdate Contact
+	err := c.ShouldBindBodyWithJSON(&contactUpdate)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid contact update request format!"})
+		return
+	}
+
+	updatableContact, _ := ReadContactByID(uint(id))
+	updatableContact.UpdateContactByID(contactUpdate)
+
+	c.JSON(http.StatusOK, updatableContact)
 }
 
 // ContactDelete is the handler for deleting a contact.
