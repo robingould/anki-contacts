@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EditContactComponent } from './edit-contact.component';
+import { EditContactComponent } from "./edit-contact.component";
 
-describe('EditContactComponent', () => {
+describe("EditContactComponent", () => {
   let component: EditContactComponent;
   let fixture: ComponentFixture<EditContactComponent>;
 
@@ -10,14 +10,14 @@ describe('EditContactComponent', () => {
     await TestBed.configureTestingModule({
       imports: [EditContactComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EditContactComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

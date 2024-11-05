@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ContactService } from '../../shared/services/contact.service';
-import { Contact } from '../../shared/models/contact';
+import { ContactService } from "../../shared/services/contact.service";
+import { Contact } from "../../shared/models/contact";
 
 @Component({
-  selector: 'app-edit-contact',
+  selector: "app-edit-contact",
   standalone: true,
   imports: [],
-  templateUrl: './edit-contact.component.html',
-  styleUrl: './edit-contact.component.css'
+  templateUrl: "./edit-contact.component.html",
+  styleUrl: "./edit-contact.component.css"
 })
 export class EditContactComponent implements OnInit {
   public contactID = 0;
