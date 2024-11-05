@@ -1,10 +1,10 @@
 export interface Contact {
-	ID: number;
+	ID: number | null | undefined;
 	FirstName: string;
 	LastName: string;
-	Email: string;
-	PhoneNumber: string;
-	Birthday: string;
-	CreatedAt: string;
-	LastContacted: string;
+	Email: string | null | undefined;
+	PhoneNumber: string | null | undefined;
+	Birthday: string | null | undefined;
+	CreatedAt: string | null | undefined;
+	LastContacted: string | null | undefined;
 }
