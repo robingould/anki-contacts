@@ -1,3 +1,92 @@
 <h3>Edit contact</h3>
 <a href="/">Go Back</a>
-<p>editing contact</p>
+<div *ngIf="contactLoaded | async">
+<form [formGroup]="contactForm" (ngSubmit)="handleSubmit()">
+	<label>
+		First Name
+		<input type="text" formControlName="FirstName" />
+		<div
+			*ngIf="
+				contactForm.get('FirstName')?.invalid &&
+				(contactForm.get('FirstName')?.dirty ||
+					contactForm.get('FirstName')?.touched)
+			"
+		>
+			<div
+				*ngIf="contactForm.get('FirstName')?.errors?.['required']"
+				class="error-text"
+			>
+				FirstName is required!
+			</div>
+		</div>
+	</label>
+
+	<label>
+		Last Name
+		<input type="text" formControlName="LastName" />
+		<div
+			*ngIf="
+				contactForm.get('LastName')?.invalid &&
+				(contactForm.get('LastName')?.dirty ||
+					contactForm.get('LastName')?.touched)
+			"
+		>
+			<div
+				*ngIf="contactForm.get('LastName')?.errors?.['required']"
+				class="error-text"
+			>
+				LastName is required!
+			</div>
+		</div>
+	</label>
+
+	<label>
+		Email
+		<input type="email" formControlName="Email" />
+		<div
+			*ngIf="
+				contactForm.get('Email')?.invalid &&
+				(contactForm.get('Email')?.dirty || contactForm.get('Email')?.touched)
+			"
+		>
+			<div
+				*ngIf="contactForm.get('Email')?.errors?.['email']"
+				class="error-text"
+			>
+				Invalid email format!
+			</div>
+		</div>
+	</label>
+
+	<label>
+		Phone Number
+		<input type="tel" formControlName="PhoneNumber" />
+		<div
+			*ngIf="
+				contactForm.get('PhoneNumber')?.invalid &&
+				(contactForm.get('PhoneNumber')?.dirty ||
+					contactForm.get('PhoneNumber')?.touched)
+			"
+		>
+			<div
+				*ngIf="contactForm.get('PhoneNumber')?.errors?.['pattern']"
+				class="error-text"
+			>
+				Invalid phone number format!
+			</div>
+		</div>
+	</label>
+
+	<label>
+		Birthday
+		<input type="date" formControlName="Birthday" />
+	</label>
+
+	<label>
+		Date Last Contacted
+		<input type="date" formControlName="LastContacted" />
+	</label>
+
+	<input type="submit" value="Update contact" [disabled]="!contactForm.valid" />
+</form>
+</div>
