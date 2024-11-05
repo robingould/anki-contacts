@@ -25,8 +25,8 @@ export class ContactListComponent implements OnInit {
 			}
 		);
 	};
-	editContact(contact: Contact) {
-		this.router.navigate(["edit-contact", contact])
+	editContact(contactID: number) {
+		this.router.navigate(["edit-contact", contactID])
 	}
 
 	deleteContact(contactID: number) {
