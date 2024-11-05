@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from "@angular/router";
 import { ContactService } from "../../shared/services/contact.service";
 import { Contact } from "../../shared/models/contact";
 
