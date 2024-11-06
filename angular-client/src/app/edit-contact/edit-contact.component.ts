@@ -46,7 +46,9 @@ export class EditContactComponent implements OnInit {
 		private readonly contactService: ContactService,
 		private readonly route: ActivatedRoute,
 		private readonly router: Router
-	) { }
+	) {
+		
+	}
 
 	/** Angular lifecycle hook. */
 	public ngOnInit(): void {

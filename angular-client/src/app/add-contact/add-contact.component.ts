@@ -22,7 +22,12 @@ import { convertToISODateTime } from "../../shared/utils";
 })
 export class AddContactComponent {
 
-	constructor(private readonly contactService: ContactService, private readonly router: Router) { }
+	constructor(
+		private readonly contactService: ContactService, 
+		private readonly router: Router
+	) { 
+		
+	}
 
 	public contactForm = new FormGroup({
 		Birthday: new FormControl(""),

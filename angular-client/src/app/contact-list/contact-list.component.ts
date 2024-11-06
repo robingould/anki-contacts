@@ -19,8 +19,11 @@ import { ContactService } from "../../shared/services/contact.service";
 export class ContactListComponent implements OnInit {
 	public contactList: Contact[] = [];
 
-	constructor(private readonly contactService: ContactService, private readonly router: Router) {
-
+	constructor(
+		private readonly contactService: ContactService, 
+		private readonly router: Router
+	) { 
+		
 	}
 
 	/** Angular lifecycle hook. */
