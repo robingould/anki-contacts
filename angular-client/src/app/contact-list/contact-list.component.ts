@@ -50,16 +50,17 @@ export class ContactListComponent implements OnInit {
 		const contact = this.contactList.find(contact => contact.ID === contactID);
 		if (!contact) {
 			console.error("Undefined contact reached on frontend during deletion!");
-		} else {
-			const contactName = `${contact.FirstName} ${contact.LastName}`;
-			if (confirm("Are you sure to delete contact:" + ` ${  contactName  }?`)) {
-				this.contactService.deleteContact(contactID).subscribe(
-					() => {
-						this.contactList = this.contactList.filter(
-							contact => contact.ID !== contactID);
-					}
-				);
-			}
+			return;
+		}
+
+		const contactName = `${contact.FirstName} ${contact.LastName}`;
+		if (confirm("Are you sure to delete contact:" + ` ${  contactName  }?`)) {
+			this.contactService.deleteContact(contactID).subscribe(
+				() => {
+					this.contactList = this.contactList.filter(
+						contact => contact.ID !== contactID);
+				}
+			);
 		}
 	};
 }
