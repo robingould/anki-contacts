@@ -44,21 +44,20 @@ export class ContactListComponent implements OnInit {
 	/**
 	 * Handles a user clicking on the "Delete" button for a contact.
 	 *
-	 * @param contactID The ID of the contact being deleted.
+	 * @param contact The ID of the contact being deleted.
 	 */
-	public deleteContact(contactID: number): void {
-		const contact = this.contactList.find(c => c.ID === contactID);
-		if (!contact) {
-			console.error("Undefined contact reached on frontend during deletion!");
+	public deleteContact(contact: Contact): void {
+		if (contact.ID === null || contact.ID === undefined) {
+			console.error("Undefined contact ID reached on frontend during deletion!");
 			return;
 		}
 
 		const contactName = `${contact.FirstName} ${contact.LastName}`;
 		if (confirm("Are you sure to delete contact:" + ` ${  contactName  }?`)) {
-			this.contactService.deleteContact(contactID).subscribe(
+			this.contactService.deleteContact(contact.ID).subscribe(
 				() => {
 					this.contactList = this.contactList.filter(
-						c => c.ID !== contactID);
+						c => c.ID !== contact.ID);
 				}
 			);
 		}
