@@ -9,11 +9,11 @@ import { ContactListComponent } from "./contact-list/contact-list.component";
  * contain the rest of it.
  */
 @Component({
+	imports: [RouterOutlet, FormsModule, ContactListComponent],
 	selector: "app-root",
 	standalone: true,
-	imports: [RouterOutlet, FormsModule, ContactListComponent],
+	styleUrl: "./app.component.css",
 	templateUrl: "./app.component.html",
-	styleUrl: "./app.component.css"
 })
 export class AppComponent {
 }

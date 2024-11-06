@@ -10,11 +10,11 @@ import { ContactService } from "../../shared/services/contact.service";
  * AddContactComponent is the form that adds a new contact.
  */
 @Component({
+	imports: [ReactiveFormsModule, CommonModule],
 	selector: "app-add-contact",
 	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule],
+	styleUrl: "./add-contact.component.css",
 	templateUrl: "./add-contact.component.html",
-	styleUrl: "./add-contact.component.css"
 })
 export class AddContactComponent {
 
@@ -22,12 +22,12 @@ export class AddContactComponent {
 		private readonly router: Router) { }
 
 	contactForm = new FormGroup({
-		FirstName: new FormControl("", Validators.required),
-		LastName: new FormControl("", Validators.required),
-		Email: new FormControl("", [Validators.email]),
-		PhoneNumber: new FormControl("", [Validators.pattern("^((\\+\\d{1,3}[- ]?)?\\d{10})$")]),
 		Birthday: new FormControl(""),
+		Email: new FormControl("", [Validators.email]),
+		FirstName: new FormControl("", Validators.required),
 		LastContacted: new FormControl(""),
+		LastName: new FormControl("", Validators.required),
+		PhoneNumber: new FormControl("", [Validators.pattern("^((\\+\\d{1,3}[- ]?)?\\d{10})$")]),
 	});
 
 	/**
@@ -51,14 +51,14 @@ export class AddContactComponent {
 	 */
 	handleSubmit() {
 		const contact: Contact = {
-			ID: null,
-			FirstName: this.contactForm.value.FirstName!,
-			LastName: this.contactForm.value.LastName!,
-			Email: this.contactForm.value.Email,
-			PhoneNumber: this.contactForm.value.PhoneNumber,
 			Birthday: this.convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,
-			LastContacted: this.convertToISODateTime(this.contactForm.value.LastContacted)
+			Email: this.contactForm.value.Email,
+			FirstName: this.contactForm.value.FirstName!,
+			ID: null,
+			LastContacted: this.convertToISODateTime(this.contactForm.value.LastContacted),
+			LastName: this.contactForm.value.LastName!,
+			PhoneNumber: this.contactForm.value.PhoneNumber,
 		};
 
 		this.contactService.createContact(contact).subscribe(

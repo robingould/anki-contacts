@@ -10,11 +10,11 @@ import { ContactService } from "../../shared/services/contact.service";
  * EditContactComponent is the form for editing an existing contact.
  */
 @Component({
+	imports: [CommonModule, ReactiveFormsModule],
 	selector: "app-edit-contact",
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule],
+	styleUrl: "./edit-contact.component.css",
 	templateUrl: "./edit-contact.component.html",
-	styleUrl: "./edit-contact.component.css"
 })
 export class EditContactComponent implements OnInit {
 	public contact!: Contact;
@@ -46,12 +46,12 @@ export class EditContactComponent implements OnInit {
 	 */
 	private setFormGroup() {
 		this.contactForm = new FormGroup({
-			FirstName: new FormControl(this.contact.FirstName, Validators.required),
-			LastName: new FormControl(this.contact.LastName, Validators.required),
-			Email: new FormControl(this.contact.Email, [Validators.email]),
-			PhoneNumber: new FormControl(this.contact.PhoneNumber, [Validators.pattern("^((\\+\\d{1,3}[- ]?)?\\d{10})$")]),
 			Birthday: new FormControl(this.contact.Birthday),
+			Email: new FormControl(this.contact.Email, [Validators.email]),
+			FirstName: new FormControl(this.contact.FirstName, Validators.required),
 			LastContacted: new FormControl(this.contact.LastContacted),
+			LastName: new FormControl(this.contact.LastName, Validators.required),
+			PhoneNumber: new FormControl(this.contact.PhoneNumber, [Validators.pattern("^((\\+\\d{1,3}[- ]?)?\\d{10})$")]),
 		});
 	}
 
@@ -76,14 +76,14 @@ export class EditContactComponent implements OnInit {
 	 */
 	handleSubmit() {
 		const contact: Contact = {
-			ID: null,
-			FirstName: this.contactForm.value.FirstName!,
-			LastName: this.contactForm.value.LastName!,
-			Email: this.contactForm.value.Email,
-			PhoneNumber: this.contactForm.value.PhoneNumber,
 			Birthday: this.convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,
-			LastContacted: this.convertToISODateTime(this.contactForm.value.LastContacted)
+			Email: this.contactForm.value.Email,
+			FirstName: this.contactForm.value.FirstName!,
+			ID: null,
+			LastContacted: this.convertToISODateTime(this.contactForm.value.LastContacted),
+			LastName: this.contactForm.value.LastName!,
+			PhoneNumber: this.contactForm.value.PhoneNumber,
 		};
 
 		this.contactService.updateContact(contact).subscribe(

@@ -10,11 +10,11 @@ import { ContactService } from "../../shared/services/contact.service";
  * the app, really.
  */
 @Component({
+	imports: [CommonModule],
 	selector: "app-contact-list",
 	standalone: true,
-	imports: [CommonModule],
+	styleUrl: "./contact-list.component.css",
 	templateUrl: "./contact-list.component.html",
-	styleUrl: "./contact-list.component.css"
 })
 export class ContactListComponent implements OnInit {
 	public contactList: Contact[] = [];
