@@ -8,13 +8,12 @@
 		<li>birthday: {{ contact.Birthday }}</li>
 		<li>last contacted: {{ contact.LastContacted }}</li>
 	</ul>
-	<button
-		type="button"
-		className="edit-contact"
-		(click)="editContact(contact.ID!)"
+	<a
+		class="edit-contact"
+		[href]="'/edit-contact/'+contact.ID"
 	>
 		Edit Contact
-	</button>
+	</a>
 	<button
 		type="button"
 		className="delete-contact"
