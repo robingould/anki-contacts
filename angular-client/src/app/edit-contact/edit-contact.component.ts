@@ -8,7 +8,7 @@ import { ActivatedRoute , Router } from "@angular/router";
 
 import { Contact } from "../../shared/models/contact";
 import { ContactService } from "../../shared/services/contact.service";
-import { convertToISODateTime } from "../../shared/utils";
+import { convertToISODateTime, controlDateFormat } from "../../shared/utils";
 
 /**
  * EditContactComponent is the form for editing an existing contact.
@@ -68,10 +68,10 @@ export class EditContactComponent implements OnInit {
 	 * Resets the form group.
 	 */
 	private setFormGroup(): void {
-		this.contactForm.controls.Birthday.setValue(this.contact.Birthday ?? null);
+		this.contactForm.controls.Birthday.setValue(controlDateFormat(this.contact.Birthday) ?? null);
 		this.contactForm.controls.Email.setValue(this.contact.Email ?? null);
 		this.contactForm.controls.FirstName.setValue(this.contact.FirstName);
-		this.contactForm.controls.LastContacted.setValue(this.contact.LastContacted ?? null);
+		this.contactForm.controls.LastContacted.setValue(controlDateFormat(this.contact.LastContacted) ?? null);
 		this.contactForm.controls.LastName.setValue(this.contact.LastName);
 		this.contactForm.controls.PhoneNumber.setValue(this.contact.PhoneNumber ?? null);
 	}
