@@ -47,7 +47,7 @@ export class ContactListComponent implements OnInit {
 	 * @param contactID The ID of the contact being deleted.
 	 */
 	public deleteContact(contactID: number): void {
-		const contact = this.contactList.find(contact => contact.ID === contactID);
+		const contact = this.contactList.find(c => c.ID === contactID);
 		if (!contact) {
 			console.error("Undefined contact reached on frontend during deletion!");
 			return;
@@ -58,7 +58,7 @@ export class ContactListComponent implements OnInit {
 			this.contactService.deleteContact(contactID).subscribe(
 				() => {
 					this.contactList = this.contactList.filter(
-						contact => contact.ID !== contactID);
+						c => c.ID !== contactID);
 				}
 			);
 		}
