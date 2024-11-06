@@ -24,7 +24,7 @@ export class ContactListComponent implements OnInit {
 	}
 
 	/** Angular lifecycle hook. */
-	public async ngOnInit(): Promise<void> {
+	public ngOnInit(): void {
 		this.contactService.getContacts().subscribe(
 			data => {
 				this.contactList = data;
@@ -37,7 +37,7 @@ export class ContactListComponent implements OnInit {
 	 *
 	 * @param contactID The ID of the contact being edited.
 	 */
-	editContact(contactID: number) {
+	public editContact(contactID: number) {
 		this.router.navigate(["edit-contact", contactID]);
 	}
 
@@ -46,7 +46,7 @@ export class ContactListComponent implements OnInit {
 	 *
 	 * @param contactID The ID of the contact being deleted.
 	 */
-	deleteContact(contactID: number) {
+	public deleteContact(contactID: number) {
 		const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID);
 		if (typeof (contact) === undefined) {
 			console.log("Undefined contact reached on frontend during deletion!");

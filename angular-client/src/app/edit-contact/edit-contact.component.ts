@@ -19,8 +19,8 @@ import { convertToISODateTime } from "../../shared/utils";
 })
 export class EditContactComponent implements OnInit {
 	public contact!: Contact;
-	contactLoaded!: Promise<boolean>;
-	contactForm!: FormGroup;
+	public contactLoaded!: Promise<boolean>;
+	public contactForm!: FormGroup;
 
 	constructor(
 		private readonly contactService: ContactService,
@@ -29,8 +29,8 @@ export class EditContactComponent implements OnInit {
 	) { }
 
 	/** Angular lifecycle hook. */
-	ngOnInit() {
-		this.route.params.subscribe(async (params) => {
+	public ngOnInit() {
+		this.route.params.subscribe((params) => {
 			const contactID: number = params["id"];
 			this.contactService.getContact(contactID).subscribe(
 				(contactData: Contact) => {
@@ -59,7 +59,7 @@ export class EditContactComponent implements OnInit {
 	/**
 	 * Handles submission of the form.
 	 */
-	handleSubmit() {
+	public handleSubmit() {
 		const contact: Contact = {
 			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,
@@ -73,7 +73,9 @@ export class EditContactComponent implements OnInit {
 
 		this.contactService.updateContact(contact).subscribe(
 			err => console.log(err),
-			async () => this.router.navigate([""])
+			() => {
+				this.router.navigate([""]);
+			}
 		);
 	}
 

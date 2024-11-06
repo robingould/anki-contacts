@@ -22,7 +22,7 @@ export class AddContactComponent {
 	constructor(private readonly contactService: ContactService,
 		private readonly router: Router) { }
 
-	contactForm = new FormGroup({
+	public contactForm = new FormGroup({
 		Birthday: new FormControl(""),
 		Email: new FormControl("", [Validators.email]),
 		FirstName: new FormControl("", Validators.required),
@@ -34,7 +34,7 @@ export class AddContactComponent {
 	/**
 	 * Handles submission of the form.
 	 */
-	handleSubmit() {
+	public handleSubmit() {
 		const contact: Contact = {
 			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,
@@ -48,7 +48,9 @@ export class AddContactComponent {
 
 		this.contactService.createContact(contact).subscribe(
 			err => console.log(err),
-			async () => this.router.navigate([""])
+			() => {
+				this.router.navigate([""]);
+			}
 		);
 	}
 }
