@@ -40,6 +40,7 @@ export class EditContactComponent implements OnInit {
 		LastName: new FormControl("", Validators.required),
 		PhoneNumber: new FormControl("", Validators.pattern(/^((\+\d{1,3}[- ]?)?\d{10})$/)),
 	});
+	public contactID: number = 0;
 
 	constructor(
 		private readonly contactService: ContactService,
@@ -50,8 +51,8 @@ export class EditContactComponent implements OnInit {
 	/** Angular lifecycle hook. */
 	public ngOnInit(): void {
 		this.route.params.subscribe((params) => {
-			const contactID: number = params["id"];
-			this.contactService.getContact(contactID).subscribe(
+			this.contactID = params["id"];
+			this.contactService.getContact(this.contactID).subscribe(
 				(contactData: Contact) => {
 					this.contact = contactData;
 					this.contactLoaded = Promise.resolve(true);
@@ -98,7 +99,7 @@ export class EditContactComponent implements OnInit {
 			PhoneNumber: this.contactForm.value.PhoneNumber,
 		};
 
-		this.contactService.updateContact(contact).subscribe(
+		this.contactService.updateContact(contact, this.contactID).subscribe(
 			c => {
 				console.info("contact updated:", c);
 				this.router.navigate([""]);

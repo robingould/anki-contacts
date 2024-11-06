@@ -52,8 +52,8 @@ export class ContactService {
 	 * @param contact The new definition of the Contact.
 	 * @returns The edited contact.
 	 */
-	public updateContact(contact: Contact): Observable<Contact> {
-		return this.http.put<Contact>(`${this.apiUrl}/contacts`, { contact }.contact);
+	public updateContact(contact: Contact, contactID: number): Observable<Contact> {
+		return this.http.put<Contact>(`${this.apiUrl}/contacts/${contactID}`, { contact }.contact);
 	}
 
 	/**
