@@ -38,7 +38,7 @@ export class EditContactComponent implements OnInit {
 		FirstName: new FormControl("", Validators.required),
 		LastContacted: new FormControl(""),
 		LastName: new FormControl("", Validators.required),
-		PhoneNumber: new FormControl("", Validators.pattern("^((\\+\\d{1,3}[- ]?)?\\d{10})$")),
+		PhoneNumber: new FormControl("", Validators.pattern(/^((\+\d{1,3}[- ]?)?\d{10})$/)),
 	});
 
 	constructor(
