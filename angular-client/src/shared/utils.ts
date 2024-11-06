@@ -25,6 +25,6 @@ export function convertToISODateTime(dateString: string | null | undefined): str
 export function controlDateFormat(dateString: string | null | undefined): string | null {
 	if (dateString !== null && dateString !== undefined) {
 		return formatDate(dateString,'yyyy-MM-dd','en');
-	} 
+	}
 	return null;
 }

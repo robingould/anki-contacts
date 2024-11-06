@@ -1,0 +1,17 @@
+<div class="login-container">
+	Pretend to login pls
+	<div class="form-group">
+		<label>
+			Username
+			<input type="text" id="username" name="username" #username/>
+		</label>
+
+		<label>
+			Password
+			<input type="password" id="password" name="password" #password/>
+		</label>
+		
+		<button (click)="login(username.value, password.value)">Login</button>
+	</div>
+
+</div>
