@@ -1,3 +1,6 @@
+/**
+ * A Contact is someone you can get in touch with.
+ */
 export interface Contact {
 	ID: number | null | undefined;
 	FirstName: string;

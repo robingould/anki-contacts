@@ -6,6 +6,9 @@ import { Router } from "@angular/router";
 import { Contact } from "../../shared/models/contact";
 import { ContactService } from "../../shared/services/contact.service";
 
+/**
+ * AddContactComponent is the form that adds a new contact.
+ */
 @Component({
 	selector: "app-add-contact",
 	standalone: true,
@@ -27,6 +30,12 @@ export class AddContactComponent {
 		LastContacted: new FormControl(""),
 	});
 
+	/**
+	 * Converts a date to an ISO format.
+	 *
+	 * @param dateString The date being converted.
+	 * @returns The converted date.
+	 */
 	convertToISODateTime(dateString: string | null | undefined): string | null | undefined {
 		if (dateString === null || dateString === undefined) {
 			return dateString;
@@ -37,6 +46,9 @@ export class AddContactComponent {
 		return isoString.replace("Z", "-00:00"); // Replace the Z with -00:00
 	}
 
+	/**
+	 * Handles submission of the form.
+	 */
 	handleSubmit() {
 		const contact: Contact = {
 			ID: null,

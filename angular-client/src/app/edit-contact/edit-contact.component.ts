@@ -6,6 +6,9 @@ import { ActivatedRoute , Router } from "@angular/router";
 import { Contact } from "../../shared/models/contact";
 import { ContactService } from "../../shared/services/contact.service";
 
+/**
+ * EditContactComponent is the form for editing an existing contact.
+ */
 @Component({
 	selector: "app-edit-contact",
 	standalone: true,
@@ -24,6 +27,7 @@ export class EditContactComponent implements OnInit {
 		private readonly router: Router
 	) { }
 
+	/** Angular lifecycle hook. */
 	ngOnInit() {
 		this.route.params.subscribe(async (params) => {
 			const contactID: number = params["id"];
@@ -37,6 +41,9 @@ export class EditContactComponent implements OnInit {
 		});
 	}
 
+	/**
+	 * Resets the form group.
+	 */
 	private setFormGroup() {
 		this.contactForm = new FormGroup({
 			FirstName: new FormControl(this.contact.FirstName, Validators.required),
@@ -48,6 +55,12 @@ export class EditContactComponent implements OnInit {
 		});
 	}
 
+	/**
+	 * Converts a date to an ISO format.
+	 *
+	 * @param dateString The date being converted.
+	 * @returns The converted date.
+	 */
 	convertToISODateTime(dateString: string | null | undefined): string | null | undefined {
 		if (dateString === null || dateString === undefined) {
 			return dateString;
@@ -58,6 +71,9 @@ export class EditContactComponent implements OnInit {
 		return isoString.replace("Z", "-00:00"); // Replace the Z with -00:00
 	}
 
+	/**
+	 * Handles submission of the form.
+	 */
 	handleSubmit() {
 		const contact: Contact = {
 			ID: null,

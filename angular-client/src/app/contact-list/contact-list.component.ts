@@ -5,6 +5,10 @@ import { Router } from "@angular/router";
 import type { Contact } from "../../shared/models/contact";
 import { ContactService } from "../../shared/services/contact.service";
 
+/**
+ * ContactListComponent is the actual list of contacts. Basically the meat of
+ * the app, really.
+ */
 @Component({
 	selector: "app-contact-list",
 	standalone: true,
@@ -19,6 +23,7 @@ export class ContactListComponent implements OnInit {
 
 	}
 
+	/** Angular lifecycle hook. */
 	public async ngOnInit(): Promise<void> {
 		this.contactService.getContacts().subscribe(
 			data => {
@@ -27,10 +32,20 @@ export class ContactListComponent implements OnInit {
 		);
 	};
 
+	/**
+	 * Handles a user clicking on the "Edit" button for a contact.
+	 *
+	 * @param contactID The ID of the contact being edited.
+	 */
 	editContact(contactID: number) {
 		this.router.navigate(["edit-contact", contactID]);
 	}
 
+	/**
+	 * Handles a user clicking on the "Delete" button for a contact.
+	 *
+	 * @param contactID The ID of the contact being deleted.
+	 */
 	deleteContact(contactID: number) {
 		const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID);
 		if (typeof (contact) === undefined) {

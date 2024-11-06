@@ -4,6 +4,10 @@ import { RouterOutlet } from "@angular/router";
 
 import { ContactListComponent } from "./contact-list/contact-list.component";
 
+/**
+ * AppComponent is the main component for the app. It basically just serves to
+ * contain the rest of it.
+ */
 @Component({
 	selector: "app-root",
 	standalone: true,
@@ -12,5 +16,4 @@ import { ContactListComponent } from "./contact-list/contact-list.component";
 	styleUrl: "./app.component.css"
 })
 export class AppComponent {
-
 }
