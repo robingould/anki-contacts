@@ -24,11 +24,11 @@ func main() {
 
 	// Testing example table creation
 	emailA := "yippee@waow.gov"
-	phoneA := "+1234567890"
+	phoneA := "1234567890"
 	birthdayA := time.Date(1990, time.January, 1, 0, 0, 0, 0, time.UTC)
 
 	emailB := "test@waow.gov"
-	phoneB := "+9876543210"
+	phoneB := "9876543210"
 	birthdayB := time.Date(2000, time.December, 2, 2, 2, 0, 0, time.UTC)
 
 	contacts := []*utils.Contact{
@@ -53,7 +53,7 @@ func main() {
 	result := db.Create(contacts) // pass a slice to insert multiple rows
 
 	emailC := "yueah@waow.gov"
-	phoneC := "+11111111"
+	phoneC := "11111111"
 	birthdayC := time.Date(1999, time.January, 2, 2, 2, 0, 0, time.UTC)
 
 	contactCreationDummy := utils.Contact{
