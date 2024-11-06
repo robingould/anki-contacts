@@ -1,3 +1,6 @@
+// Unfortunately we're using script-driven forms, so this is annoying to have
+// on.
+/* eslint-disable @typescript-eslint/unbound-method */
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
