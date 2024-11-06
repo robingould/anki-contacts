@@ -29,7 +29,7 @@ export class EditContactComponent implements OnInit {
 	) { }
 
 	/** Angular lifecycle hook. */
-	public ngOnInit() {
+	public ngOnInit(): void {
 		this.route.params.subscribe((params) => {
 			const contactID: number = params["id"];
 			this.contactService.getContact(contactID).subscribe(
@@ -45,7 +45,7 @@ export class EditContactComponent implements OnInit {
 	/**
 	 * Resets the form group.
 	 */
-	private setFormGroup() {
+	private setFormGroup(): void {
 		this.contactForm = new FormGroup({
 			Birthday: new FormControl(this.contact.Birthday),
 			Email: new FormControl(this.contact.Email, [Validators.email]),
@@ -59,7 +59,7 @@ export class EditContactComponent implements OnInit {
 	/**
 	 * Handles submission of the form.
 	 */
-	public handleSubmit() {
+	public handleSubmit(): void {
 		const contact: Contact = {
 			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,

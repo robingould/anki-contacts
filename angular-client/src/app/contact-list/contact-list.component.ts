@@ -37,7 +37,7 @@ export class ContactListComponent implements OnInit {
 	 *
 	 * @param contactID The ID of the contact being edited.
 	 */
-	public editContact(contactID: number) {
+	public editContact(contactID: number): void {
 		this.router.navigate(["edit-contact", contactID]);
 	}
 
@@ -46,7 +46,7 @@ export class ContactListComponent implements OnInit {
 	 *
 	 * @param contactID The ID of the contact being deleted.
 	 */
-	public deleteContact(contactID: number) {
+	public deleteContact(contactID: number): void {
 		const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID);
 		if (typeof (contact) === undefined) {
 			console.log("Undefined contact reached on frontend during deletion!");

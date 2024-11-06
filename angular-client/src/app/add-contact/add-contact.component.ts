@@ -34,7 +34,7 @@ export class AddContactComponent {
 	/**
 	 * Handles submission of the form.
 	 */
-	public handleSubmit() {
+	public handleSubmit(): void {
 		const contact: Contact = {
 			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,
