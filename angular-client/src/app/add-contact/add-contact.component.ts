@@ -1,57 +1,67 @@
-import { Component } from "@angular/core";
+// Unfortunately we're using script-driven forms, so this is annoying to have
+// on.
+/* eslint-disable @typescript-eslint/unbound-method */
 import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ContactService } from "../../shared/services/contact.service";
-import { Contact } from "../../shared/models/contact";
 
+import { Contact } from "../../shared/models/contact";
+import { ContactService } from "../../shared/services/contact.service";
+import { convertToISODateTime } from "../../shared/utils";
+
+/**
+ * AddContactComponent is the form that adds a new contact.
+ */
 @Component({
+	imports: [ReactiveFormsModule, CommonModule],
 	selector: "app-add-contact",
 	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule],
+	styleUrl: "./add-contact.component.css",
 	templateUrl: "./add-contact.component.html",
-	styleUrl: "./add-contact.component.css"
 })
 export class AddContactComponent {
 
-constructor(private readonly contactService: ContactService, 
-			private readonly router: Router) 
-		{ }
+	constructor(private readonly contactService: ContactService, private readonly router: Router) { }
 
-contactForm = new FormGroup({
-	FirstName: new FormControl("", Validators.required),
-	LastName: new FormControl("", Validators.required),
-	Email: new FormControl("", [Validators.email]),
-	PhoneNumber: new FormControl("", [Validators.pattern('^((\\+\\d{1,3}[- ]?)?\\d{10})$')]),
-	Birthday: new FormControl(""),
-	LastContacted: new FormControl(""),
-});
+	public contactForm = new FormGroup({
+		Birthday: new FormControl(""),
+		Email: new FormControl("", Validators.email),
+		FirstName: new FormControl("", Validators.required),
+		LastContacted: new FormControl(""),
+		LastName: new FormControl("", Validators.required),
+		PhoneNumber: new FormControl("", Validators.pattern(/^((\+\d{1,3}[- ]?)?\d{10})$/)),
+	});
 
-convertToISODateTime(dateString: string | null | undefined): string | null | undefined {
-	if (dateString === null || dateString === undefined) {
-		return dateString
-	}
-	const date = new Date(dateString);
-	date.setUTCHours(0, 0, 0, 0); // Set time to 00:00:00.000 in UTC
-	const isoString = date.toISOString(); // Get the ISO string, e.g., "2024-11-04T00:00:00.000Z"
-	return isoString.replace("Z", "-00:00"); // Replace the Z with -00:00
-}
+	/**
+	 * Handles submission of the form.
+	 */
+	public handleSubmit(): void {
+		// property names being extracted, so it's fine
+		// eslint-disable-next-line @typescript-eslint/naming-convention
+		const {FirstName, LastName} = this.contactForm.value;
+		if (!FirstName || !LastName) {
+			console.error("this should not be possible, but unfortunately we're using script-driven forms so... null first or last name");
+			console.info("FirstName:", FirstName);
+			console.info("LastName:", LastName);
+			return;
+		}
+		const contact: Contact = {
+			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
+			CreatedAt: null,
+			Email: this.contactForm.value.Email,
+			FirstName,
+			ID: null,
+			LastContacted: convertToISODateTime(this.contactForm.value.LastContacted),
+			LastName,
+			PhoneNumber: this.contactForm.value.PhoneNumber,
+		};
 
-handleSubmit() {
-	const contact: Contact = {
-		ID: null,
-		FirstName: this.contactForm.value.FirstName!,
-		LastName: this.contactForm.value.LastName!,
-		Email: this.contactForm.value.Email,
-		PhoneNumber: this.contactForm.value.PhoneNumber,
-		Birthday: this.convertToISODateTime(this.contactForm.value.Birthday),
-		CreatedAt: null,
-		LastContacted: this.convertToISODateTime(this.contactForm.value.LastContacted)
-	}
-
-	this.contactService.createContact(contact).subscribe(
-		err => console.log(err),
-		() => this.router.navigate([''])
+		this.contactService.createContact(contact).subscribe(
+			c => {
+				console.info("contact created:", c);
+				this.router.navigate([""]);
+			}
 		);
 	}
 }

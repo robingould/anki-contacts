@@ -1,80 +1,108 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
-import { ContactService } from "../../shared/services/contact.service";
-import { Router } from "@angular/router";
-import { Contact } from "../../shared/models/contact";
+// Unfortunately we're using script-driven forms, so this is annoying to have
+// on.
+/* eslint-disable @typescript-eslint/unbound-method */
 import { CommonModule } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute , Router } from "@angular/router";
 
+import { Contact } from "../../shared/models/contact";
+import { ContactService } from "../../shared/services/contact.service";
+import { convertToISODateTime } from "../../shared/utils";
+
+/**
+ * EditContactComponent is the form for editing an existing contact.
+ */
 @Component({
+	imports: [CommonModule, ReactiveFormsModule],
 	selector: "app-edit-contact",
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule],
+	styleUrl: "./edit-contact.component.css",
 	templateUrl: "./edit-contact.component.html",
-	styleUrl: "./edit-contact.component.css"
 })
 export class EditContactComponent implements OnInit {
-	public contact!: Contact;
-	contactLoaded!: Promise<boolean>;
-	contactForm!: FormGroup;
+	public contact: Contact = {
+		Birthday: undefined,
+		CreatedAt: undefined,
+		Email: undefined,
+		FirstName: "",
+		ID: undefined,
+		LastContacted: undefined,
+		LastName: "",
+		PhoneNumber: undefined
+	};
+	public contactLoaded = new Promise<boolean>(r => r(false));
+	public contactForm = new FormGroup({
+		Birthday: new FormControl(""),
+		Email: new FormControl("", Validators.email),
+		FirstName: new FormControl("", Validators.required),
+		LastContacted: new FormControl(""),
+		LastName: new FormControl("", Validators.required),
+		PhoneNumber: new FormControl("", Validators.pattern(/^((\+\d{1,3}[- ]?)?\d{10})$/)),
+	});
 
-constructor(
-	private contactService: ContactService,
-	private route: ActivatedRoute,
-	private readonly router: Router
-) { }
+	constructor(
+		private readonly contactService: ContactService,
+		private readonly route: ActivatedRoute,
+		private readonly router: Router
+	) { }
 
-ngOnInit() {
-	this.route.params.subscribe(async (params) => {
-		const contactID: number = params["id"];
-		this.contactService.getContact(contactID).subscribe(
-			(contactData: Contact) => 
-				{ 
-					this.contact = contactData; 
+	/** Angular lifecycle hook. */
+	public ngOnInit(): void {
+		this.route.params.subscribe((params) => {
+			const contactID: number = params["id"];
+			this.contactService.getContact(contactID).subscribe(
+				(contactData: Contact) => {
+					this.contact = contactData;
 					this.contactLoaded = Promise.resolve(true);
 					this.setFormGroup();
 				}
-		)
-	});
-}
-
-private setFormGroup() {
-	this.contactForm = new FormGroup({
-		FirstName: new FormControl(this.contact.FirstName, Validators.required),
-		LastName: new FormControl(this.contact.LastName, Validators.required),
-		Email: new FormControl(this.contact.Email, [Validators.email]),
-		PhoneNumber: new FormControl(this.contact.PhoneNumber, [Validators.pattern('^((\\+\\d{1,3}[- ]?)?\\d{10})$')]),
-		Birthday: new FormControl(this.contact.Birthday),
-		LastContacted: new FormControl(this.contact.LastContacted),
-	});
-}
-
-
-convertToISODateTime(dateString: string | null | undefined): string | null | undefined {
-	if (dateString === null || dateString === undefined) {
-		return dateString
-	}
-	const date = new Date(dateString);
-	date.setUTCHours(0, 0, 0, 0); // Set time to 00:00:00.000 in UTC
-	const isoString = date.toISOString(); // Get the ISO string, e.g., "2024-11-04T00:00:00.000Z"
-	return isoString.replace("Z", "-00:00"); // Replace the Z with -00:00
-}
-
-handleSubmit() {
-	const contact: Contact = {
-		ID: null,
-		FirstName: this.contactForm.value.FirstName!,
-		LastName: this.contactForm.value.LastName!,
-		Email: this.contactForm.value.Email,
-		PhoneNumber: this.contactForm.value.PhoneNumber,
-		Birthday: this.convertToISODateTime(this.contactForm.value.Birthday),
-		CreatedAt: null,
-		LastContacted: this.convertToISODateTime(this.contactForm.value.LastContacted)
+			);
+		});
 	}
 
-	this.contactService.updateContact(contact).subscribe(
-		err => console.log(err),
-		() => this.router.navigate([''])
+	/**
+	 * Resets the form group.
+	 */
+	private setFormGroup(): void {
+		this.contactForm.controls.Birthday.setValue(this.contact.Birthday ?? null);
+		this.contactForm.controls.Email.setValue(this.contact.Email ?? null);
+		this.contactForm.controls.FirstName.setValue(this.contact.FirstName);
+		this.contactForm.controls.LastContacted.setValue(this.contact.LastContacted ?? null);
+		this.contactForm.controls.LastName.setValue(this.contact.LastName);
+		this.contactForm.controls.PhoneNumber.setValue(this.contact.PhoneNumber ?? null);
+	}
+
+	/**
+	 * Handles submission of the form.
+	 */
+	public handleSubmit(): void {
+		// property names being extracted, so it's fine
+		// eslint-disable-next-line @typescript-eslint/naming-convention
+		const {FirstName, LastName} = this.contactForm.value;
+		if (!FirstName || !LastName) {
+			console.error("this should not be possible, but unfortunately we're using script-driven forms so... null first or last name");
+			console.info("FirstName:", FirstName);
+			console.info("LastName:", LastName);
+			return;
+		}
+
+		const contact: Contact = {
+			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
+			CreatedAt: null,
+			Email: this.contactForm.value.Email,
+			FirstName,
+			ID: null,
+			LastContacted: convertToISODateTime(this.contactForm.value.LastContacted),
+			LastName,
+			PhoneNumber: this.contactForm.value.PhoneNumber,
+		};
+
+		this.contactService.updateContact(contact).subscribe(
+			c => {
+				console.info("contact updated:", c);
+				this.router.navigate([""]);
+			}
 		);
 	}
 

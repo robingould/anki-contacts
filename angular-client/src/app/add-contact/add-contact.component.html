@@ -3,7 +3,7 @@
 <form [formGroup]="contactForm" (ngSubmit)="handleSubmit()">
 	<label>
 		First Name
-		<input type="text" formControlName="FirstName" />
+		<input type="text" required formControlName="FirstName" />
 		<div
 			*ngIf="
 				contactForm.get('FirstName')?.invalid &&
@@ -22,7 +22,7 @@
 
 	<label>
 		Last Name
-		<input type="text" formControlName="LastName" />
+		<input type="text" required formControlName="LastName" />
 		<div
 			*ngIf="
 				contactForm.get('LastName')?.invalid &&
