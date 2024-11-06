@@ -7,12 +7,13 @@ import { LoginComponent } from "./login/login.component";
 import { SecretBaseComponent } from "./secret-base/secret-base.component";
 
 import { secretBaseGuard } from "../shared/guards/secret-base.guard";
+import { HomeComponent } from "./home/home.component";
 
 export const routes: Routes = [
 	{
-		component: ContactListComponent,
+		component: HomeComponent,
 		path: "",
-		title: "Contact List Page",
+		title: "Home Page",
 	},
 	{
 		component: AddContactComponent,
