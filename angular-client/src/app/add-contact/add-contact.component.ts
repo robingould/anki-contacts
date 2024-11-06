@@ -47,8 +47,8 @@ export class AddContactComponent {
 		};
 
 		this.contactService.createContact(contact).subscribe(
-			err => console.log(err),
-			() => {
+			c => {
+				console.info("contact created:", c);
 				this.router.navigate([""]);
 			}
 		);

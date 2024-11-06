@@ -72,8 +72,8 @@ export class EditContactComponent implements OnInit {
 		};
 
 		this.contactService.updateContact(contact).subscribe(
-			err => console.log(err),
-			() => {
+			c => {
+				console.info("contact updated:", c);
 				this.router.navigate([""]);
 			}
 		);
