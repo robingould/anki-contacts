@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
 import { FormsModule } from "@angular/forms";
+import { RouterOutlet } from "@angular/router";
+
 import { ContactListComponent } from "./contact-list/contact-list.component";
 
 @Component({
