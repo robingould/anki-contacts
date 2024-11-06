@@ -2,7 +2,7 @@ import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
 import { provideRouter } from "@angular/router";
 import { routes } from "./app.routes";
-import { loggerInterceptor } from "../shared/interceptor/logger.interceptor";
+import { loggerInterceptor } from "../shared/interceptors/logger.interceptor";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
