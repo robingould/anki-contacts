@@ -49,9 +49,9 @@ export class ContactListComponent implements OnInit {
 	public deleteContact(contactID: number): void {
 		const contact: Contact | undefined = this.contactList.find(contact => contact.ID === contactID);
 		if (typeof (contact) === undefined) {
-			console.log("Undefined contact reached on frontend during deletion!");
+			console.error("Undefined contact reached on frontend during deletion!");
 		} else {
-			const contactName = `${contact!.FirstName  } ${  contact!.LastName}`;
+			const contactName = `${contact!.FirstName} ${contact!.LastName}`;
 			if (confirm("Are you sure to delete contact:" + ` ${  contactName  }?`)) {
 				this.contactService.deleteContact(contactID).subscribe(
 					() => {
