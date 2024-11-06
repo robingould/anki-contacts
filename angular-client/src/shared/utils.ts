@@ -1,3 +1,5 @@
+import { formatDate } from "@angular/common";
+
 /**
  * Converts a date to an ISO format.
  *
@@ -12,4 +14,17 @@ export function convertToISODateTime(dateString: string | null | undefined): str
 	date.setUTCHours(0, 0, 0, 0); // Set time to 00:00:00.000 in UTC
 	const isoString = date.toISOString(); // Get the ISO string, e.g., "2024-11-04T00:00:00.000Z"
 	return isoString.replace("Z", "-00:00"); // Replace the Z with -00:00
+}
+
+/**
+ * Ensure date is formatted correctly for being used in form.
+ *
+ * @param dateString The date being formatted.
+ * @returns The formatted date or null.
+ */
+export function controlDateFormat(dateString: string | null | undefined): string | null {
+	if (dateString !== null && dateString !== undefined) {
+		return formatDate(dateString,'yyyy-MM-dd','en');
+	} 
+	return null;
 }
