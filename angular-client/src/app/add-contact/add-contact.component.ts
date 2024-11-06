@@ -27,7 +27,7 @@ export class AddContactComponent {
 
 	public contactForm = new FormGroup({
 		Birthday: new FormControl(""),
-		Email: new FormControl("", [Validators.email]),
+		Email: new FormControl("", Validators.email),
 		FirstName: new FormControl("", Validators.required),
 		LastContacted: new FormControl(""),
 		LastName: new FormControl("", Validators.required),
@@ -38,14 +38,23 @@ export class AddContactComponent {
 	 * Handles submission of the form.
 	 */
 	public handleSubmit(): void {
+		// property names being extracted, so it's fine
+		// eslint-disable-next-line @typescript-eslint/naming-convention
+		const {FirstName, LastName} = this.contactForm.value;
+		if (!FirstName || !LastName) {
+			console.error("this should not be possible, but unfortunately we're using script-driven forms so... null first or last name");
+			console.info("FirstName:", FirstName);
+			console.info("LastName:", LastName);
+			return;
+		}
 		const contact: Contact = {
 			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,
 			Email: this.contactForm.value.Email,
-			FirstName: this.contactForm.value.FirstName!,
+			FirstName,
 			ID: null,
 			LastContacted: convertToISODateTime(this.contactForm.value.LastContacted),
-			LastName: this.contactForm.value.LastName!,
+			LastName,
 			PhoneNumber: this.contactForm.value.PhoneNumber,
 		};
 

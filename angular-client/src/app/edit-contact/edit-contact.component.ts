@@ -21,9 +21,25 @@ import { convertToISODateTime } from "../../shared/utils";
 	templateUrl: "./edit-contact.component.html",
 })
 export class EditContactComponent implements OnInit {
-	public contact!: Contact;
-	public contactLoaded!: Promise<boolean>;
-	public contactForm!: FormGroup;
+	public contact: Contact = {
+		Birthday: undefined,
+		CreatedAt: undefined,
+		Email: undefined,
+		FirstName: "",
+		ID: undefined,
+		LastContacted: undefined,
+		LastName: "",
+		PhoneNumber: undefined
+	};
+	public contactLoaded = new Promise<boolean>(r => r(false));
+	public contactForm = new FormGroup({
+		Birthday: new FormControl(""),
+		Email: new FormControl("", Validators.email),
+		FirstName: new FormControl("", Validators.required),
+		LastContacted: new FormControl(""),
+		LastName: new FormControl("", Validators.required),
+		PhoneNumber: new FormControl("", Validators.pattern("^((\\+\\d{1,3}[- ]?)?\\d{10})$")),
+	});
 
 	constructor(
 		private readonly contactService: ContactService,
@@ -49,28 +65,36 @@ export class EditContactComponent implements OnInit {
 	 * Resets the form group.
 	 */
 	private setFormGroup(): void {
-		this.contactForm = new FormGroup({
-			Birthday: new FormControl(this.contact.Birthday),
-			Email: new FormControl(this.contact.Email, [Validators.email]),
-			FirstName: new FormControl(this.contact.FirstName, Validators.required),
-			LastContacted: new FormControl(this.contact.LastContacted),
-			LastName: new FormControl(this.contact.LastName, Validators.required),
-			PhoneNumber: new FormControl(this.contact.PhoneNumber, [Validators.pattern("^((\\+\\d{1,3}[- ]?)?\\d{10})$")]),
-		});
+		this.contactForm.controls.Birthday.setValue(this.contact.Birthday ?? null);
+		this.contactForm.controls.Email.setValue(this.contact.Email ?? null);
+		this.contactForm.controls.FirstName.setValue(this.contact.FirstName);
+		this.contactForm.controls.LastContacted.setValue(this.contact.LastContacted ?? null);
+		this.contactForm.controls.LastName.setValue(this.contact.LastName);
+		this.contactForm.controls.PhoneNumber.setValue(this.contact.PhoneNumber ?? null);
 	}
 
 	/**
 	 * Handles submission of the form.
 	 */
 	public handleSubmit(): void {
+		// property names being extracted, so it's fine
+		// eslint-disable-next-line @typescript-eslint/naming-convention
+		const {FirstName, LastName} = this.contactForm.value;
+		if (!FirstName || !LastName) {
+			console.error("this should not be possible, but unfortunately we're using script-driven forms so... null first or last name");
+			console.info("FirstName:", FirstName);
+			console.info("LastName:", LastName);
+			return;
+		}
+
 		const contact: Contact = {
 			Birthday: convertToISODateTime(this.contactForm.value.Birthday),
 			CreatedAt: null,
 			Email: this.contactForm.value.Email,
-			FirstName: this.contactForm.value.FirstName!,
+			FirstName,
 			ID: null,
 			LastContacted: convertToISODateTime(this.contactForm.value.LastContacted),
-			LastName: this.contactForm.value.LastName!,
+			LastName,
 			PhoneNumber: this.contactForm.value.PhoneNumber,
 		};
 
