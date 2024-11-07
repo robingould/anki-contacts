@@ -5,8 +5,8 @@
 	<ul>
 		<li>email: {{ contact.Email }}</li>
 		<li>phone: {{ contact.PhoneNumber }}</li>
-		<li>birthday: {{ contact.Birthday }}</li>
-		<li>last contacted: {{ contact.LastContacted }}</li>
+		<li>birthday: {{ contact.Birthday | date }}</li>
+		<li>last contacted: {{ contact.LastContacted | date }}</li>
 	</ul>
 	<a
 		class="edit-contact"
