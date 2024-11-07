@@ -2,7 +2,7 @@
 <div appHoverEffect className="to-contact-container" *ngFor="let contact of toContactList">
 	<label>
 		<input type="checkbox">
-		{{ contact.FirstName }} {{ contact.LastName }} - last contacted: {{ contact.LastContacted | date | sadify }} 
+		{{ contact.FirstName }} {{ contact.LastName }} - last contacted: {{ (contact.LastContacted | date) ?? "" | sadify}}
 	</label>
 </div>
 
