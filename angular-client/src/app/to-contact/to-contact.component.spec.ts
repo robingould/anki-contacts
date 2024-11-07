@@ -10,7 +10,7 @@ describe("ToContactComponent", () => {
 		await TestBed.configureTestingModule({
 			imports: [ToContactComponent]
 		})
-		.compileComponents();
+			.compileComponents();
 
 		fixture = TestBed.createComponent(ToContactComponent);
 		component = fixture.componentInstance;

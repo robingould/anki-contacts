@@ -20,5 +20,4 @@ export class HoverEffectDirective {
 		this.elementRef.nativeElement.style.fontWeight = weight;
 	}
 
-
 }

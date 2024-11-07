@@ -2,10 +2,10 @@ import { CommonModule } from "@angular/common";
 import { Component, type OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
+import { HoverEffectDirective } from "../../shared/directives/hover-effect.directive";
 import type { Contact } from "../../shared/models/contact";
 import { ContactService } from "../../shared/services/contact.service";
 
-import { HoverEffectDirective } from "../../shared/directives/hover-effect.directive";
 /**
  * ContactListComponent is the actual list of contacts. Basically the meat of
  * the app, really.
@@ -21,10 +21,10 @@ export class ContactListComponent implements OnInit {
 	public contactList: Contact[] = [];
 
 	constructor(
-		private readonly contactService: ContactService, 
+		private readonly contactService: ContactService,
 		private readonly router: Router
-	) { 
-		
+	) {
+
 	}
 
 	/** Angular lifecycle hook. */

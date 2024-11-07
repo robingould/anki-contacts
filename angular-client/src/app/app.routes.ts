@@ -1,13 +1,13 @@
 import { Routes } from "@angular/router";
 
+import { secretBaseGuard } from "../shared/guards/secret-base.guard";
+
 import { AddContactComponent } from "./add-contact/add-contact.component";
 import { ContactListComponent } from "./contact-list/contact-list.component";
 import { EditContactComponent } from "./edit-contact/edit-contact.component";
+import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { SecretBaseComponent } from "./secret-base/secret-base.component";
-
-import { secretBaseGuard } from "../shared/guards/secret-base.guard";
-import { HomeComponent } from "./home/home.component";
 
 export const routes: Routes = [
 	{
@@ -26,7 +26,7 @@ export const routes: Routes = [
 	},
 	{
 		component: LoginComponent,
-		path: 'login',
+		path: "login",
 	},
 	{
 		component: SecretBaseComponent,

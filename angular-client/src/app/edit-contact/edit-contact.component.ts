@@ -40,14 +40,14 @@ export class EditContactComponent implements OnInit {
 		LastName: new FormControl("", Validators.required),
 		PhoneNumber: new FormControl("", Validators.pattern(/^((\+\d{1,3}[- ]?)?\d{10})$/)),
 	});
-	public contactID: number = 0;
+	public contactID = 0;
 
 	constructor(
 		private readonly contactService: ContactService,
 		private readonly route: ActivatedRoute,
 		private readonly router: Router
 	) {
-		
+
 	}
 
 	/** Angular lifecycle hook. */

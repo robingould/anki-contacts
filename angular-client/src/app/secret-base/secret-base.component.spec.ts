@@ -10,7 +10,7 @@ describe("SecretBaseComponent", () => {
 		await TestBed.configureTestingModule({
 			imports: [SecretBaseComponent]
 		})
-		.compileComponents();
+			.compileComponents();
 
 		fixture = TestBed.createComponent(SecretBaseComponent);
 		component = fixture.componentInstance;

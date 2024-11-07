@@ -16,7 +16,7 @@
 			],
 			"parserOptions": {
 				"project": [
-					"angular-client/tsconfig.json"
+					"tsconfig.json"
 				],
 				"createDefaultProgram": true
 			},
