@@ -5,7 +5,10 @@ import { HoverEffectDirective } from "../../shared/directives/hover-effect.direc
 import { Contact } from "../../shared/models/contact";
 import { SadIfyPipe } from "../../shared/pipes/sad-ify.pipe";
 import { ContactService } from "../../shared/services/contact.service";
-
+/**
+ * ToContactComponent is the list of contacts you haven't talked to in a while.
+ * Don't be mean.
+ */
 @Component({
 	imports: [CommonModule, HoverEffectDirective, SadIfyPipe],
 	selector: "app-to-contact",
@@ -21,6 +24,7 @@ export class ToContactComponent implements OnInit {
 	) {
 
 	}
+	/** Angular lifecycle hook. */
 	public ngOnInit(): void {
 		this.contactService.getContacts().subscribe(
 			data => {
