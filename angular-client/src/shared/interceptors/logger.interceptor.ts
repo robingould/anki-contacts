@@ -6,6 +6,7 @@ export const loggerInterceptor: HttpInterceptorFn = (
 	next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> => next(req).pipe(tap(event => {
 	if (event.type === HttpEventType.Response) {
+		/* eslint-disable no-console */
 		console.log(req.url, "returned a response with status", event.status);
 	}
 }));
