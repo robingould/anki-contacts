@@ -28,10 +28,10 @@ export class ToContactComponent implements OnInit {
 				const weekEarlier = new Date();
 				weekEarlier.setDate(today.getDate() - 7);
 				const sortedData = data.sort(
-					(a, b) => Date.parse(a.LastContacted!) - Date.parse(b.LastContacted!)
+					(a, b) => Date.parse(a.LastContacted ?? "") - Date.parse(b.LastContacted ?? "")
 				);
 				const filteredData = sortedData.filter(contact => {
-					const date = new Date(contact.LastContacted!);
+					const date = new Date(contact.LastContacted ?? "");
 					return date <= weekEarlier;
 				}
 				);
