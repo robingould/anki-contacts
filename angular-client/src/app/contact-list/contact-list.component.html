@@ -1,5 +1,5 @@
 <a href="/add-contact">Add Contact</a>
-<div className="contacts-container" *ngFor="let contact of contactList">
+<div appHoverEffect className="contacts-container" *ngFor="let contact of contactList">
 	<hr />
 	<p>{{ contact.FirstName }} {{ contact.LastName }}</p>
 	<ul>

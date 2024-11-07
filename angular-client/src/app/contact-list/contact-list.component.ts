@@ -5,12 +5,13 @@ import { Router } from "@angular/router";
 import type { Contact } from "../../shared/models/contact";
 import { ContactService } from "../../shared/services/contact.service";
 
+import { HoverEffectDirective } from "../hover-effect.directive";
 /**
  * ContactListComponent is the actual list of contacts. Basically the meat of
  * the app, really.
  */
 @Component({
-	imports: [CommonModule],
+	imports: [CommonModule, HoverEffectDirective],
 	selector: "app-contact-list",
 	standalone: true,
 	styleUrl: "./contact-list.component.css",
