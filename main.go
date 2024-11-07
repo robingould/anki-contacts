@@ -38,7 +38,7 @@ func main() {
 			Email:         &emailA,
 			PhoneNumber:   &phoneA,
 			Birthday:      &birthdayA,
-			LastContacted: time.Now(),
+			LastContacted: birthdayA,
 		},
 		{
 			FirstName:     "Blob",
@@ -46,7 +46,7 @@ func main() {
 			Email:         &emailB,
 			PhoneNumber:   &phoneB,
 			Birthday:      &birthdayB,
-			LastContacted: time.Now(),
+			LastContacted: birthdayB,
 		},
 	}
 
