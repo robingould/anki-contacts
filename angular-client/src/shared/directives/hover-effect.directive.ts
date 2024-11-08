@@ -1,6 +1,3 @@
-// eslint hated onMouseEnter() and onMouseLeave(), so we told it to stop
-// being as rude
-/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { Directive, ElementRef, HostListener } from "@angular/core";
 /**
  * Hover Effect Directive is a directive that highlights and bolds text
@@ -18,7 +15,8 @@ export class HoverEffectDirective {
 	 * Handles a user moving their mouse pointer over a div.
 	 *
 	 */
-	@HostListener("mouseenter") onMouseEnter(): void {
+	@HostListener("mouseenter")
+	public onMouseEnter(): void {
 		this.styleDiv("lightgray", "bold");
 	}
 	/**
@@ -26,7 +24,8 @@ export class HoverEffectDirective {
 	 * in a truly evil fashion.
 	 *
 	 */
-	@HostListener("mouseleave") onMouseLeave(): void {
+	@HostListener("mouseleave")
+	public onMouseLeave(): void {
 		this.styleDiv("", "");
 	}
 	/**
