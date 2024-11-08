@@ -11,7 +11,7 @@ describe("ContactService", () => {
 		TestBed.configureTestingModule({
 			providers: [
 				provideHttpClient(),
-				provideHttpClientTesting()
+				provideHttpClientTesting(),
 			]
 		});
 		service = TestBed.inject(ContactService);
@@ -20,5 +20,4 @@ describe("ContactService", () => {
 	it("should be created", () => {
 		expect(service).toBeTruthy();
 	});
-
 });
