@@ -27,8 +27,8 @@ export class AuthService {
 	 */
 	public login(username: string, password: string): void {
 		this.tokenService.saveToken(
-			`${(username ?? "")
-		+ (password ?? "")
+			`${(username)
+		+ (password)
 			}yayyippeeohgosh`
 		);
 		this.router.navigate([""]);

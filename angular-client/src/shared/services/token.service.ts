@@ -21,9 +21,9 @@ export class TokenService {
 	 *
 	 * @returns The requested token or null if there is no token.
 	 */
-	public getToken(): string | null{
+	public getToken(): string | null {
 		const token = localStorage.getItem("token");
-		if(token === null) {
+		if (token === null) {
 			console.error("Token was null!");
 		}
 		return token;
