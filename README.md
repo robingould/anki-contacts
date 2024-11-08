@@ -1,4 +1,4 @@
-# anki contacts
+# Anki contacts
 Practice toy CRUD App with an Angular frontend client and a Go backend. Uses MySQL as the database. Normal contact app that reminds you to call your loved ones.
 
 ## Starting
