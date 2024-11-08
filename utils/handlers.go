@@ -29,8 +29,6 @@ func ContactCreate(c *gin.Context) {
 
 // ContactsRetrieve is the handler for retrieving stored contacts.
 func ContactsRetrieve(c *gin.Context) {
-	// TODO best practices for cors?
-	c.Header("Access-Control-Allow-Origin", "*")
 	contacts, err := ReadAllContacts()
 
 	if err != nil {
