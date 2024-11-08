@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 /**
- * SadIfy Pipe ensures that your string is quite unhappy.
+ * SadIfyPipe ensures that your string is quite unhappy.
  * You did something morally wrong.
  */
 @Pipe({

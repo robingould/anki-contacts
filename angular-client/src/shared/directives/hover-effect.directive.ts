@@ -9,11 +9,9 @@ import { Directive, ElementRef, HostListener } from "@angular/core";
 })
 export class HoverEffectDirective {
 
-	constructor(private readonly elementRef: ElementRef<HTMLElement>) {
-	}
+	constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
 	/**
 	 * Handles a user moving their mouse pointer over a div.
-	 *
 	 */
 	@HostListener("mouseenter")
 	public onMouseEnter(): void {
@@ -22,7 +20,6 @@ export class HoverEffectDirective {
 	/**
 	 * Handles a user cruelly abandoning a poor, innocent div with their mouse
 	 * in a truly evil fashion.
-	 *
 	 */
 	@HostListener("mouseleave")
 	public onMouseLeave(): void {
