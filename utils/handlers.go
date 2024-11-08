@@ -45,7 +45,7 @@ func ContactRetrieveByID(c *gin.Context) {
 	// base 10, 32 bit integer
 	id, parseUintError := strconv.ParseUint(c.Param("id"), 10, 32)
 	if parseUintError != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failure to parse ID as Uint while trying to retrieve a single contact by ID!"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failure to parse ID as Uint while trying to retrieve a single contact by ID!"})
 		return
 	}
 
@@ -61,7 +61,7 @@ func ContactRetrieveByID(c *gin.Context) {
 func ContactUpdate(c *gin.Context) {
 	id, parseUintError := strconv.ParseUint(c.Param("id"), 10, 32)
 	if parseUintError != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failure to parse ID as Uint while trying to update by ID!"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failure to parse ID as Uint while trying to update by ID!"})
 		return
 	}
 	var contactUpdate Contact
@@ -81,7 +81,7 @@ func ContactUpdate(c *gin.Context) {
 func ContactDelete(c *gin.Context) {
 	id, parseUintError := strconv.ParseUint(c.Param("id"), 10, 32)
 	if parseUintError != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failure to parse ID as Uint while trying to delete by ID!"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failure to parse ID as Uint while trying to delete by ID!"})
 		return
 	}
 	err := DeleteContactByID(uint(id))
