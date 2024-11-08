@@ -7,18 +7,18 @@ docker pull mysql:latest
 docker run --name mysql-server -e MYSQL_ROOT_USER=root -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql:latest
 ```
 
-## connect to docker mysql tables
+## Connect to Docker MySQL tables
 ```bash
 docker exec -it mysql-server mysql -u root -p
 # enter password provided
 ```
 
-## run go backend
+## Run Go backend
 ```bash
 go run main.go
 ```
 
-## run angular frontend
+## Run Angular frontend
 ```bash
 cd angular-client
 ng serve
