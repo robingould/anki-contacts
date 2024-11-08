@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -24,6 +25,7 @@ func ContactCreate(c *gin.Context) {
 		return
 	}
 
+	c.Header("Location", fmt.Sprintf("/contacts/%d", contact.ID))
 	c.JSON(http.StatusCreated, contact)
 }
 
