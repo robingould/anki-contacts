@@ -1,4 +1,6 @@
-# angular-go-sql-crud
+# anki contacts
+Simple toy CRUD App with an Angular frontend client and a Go backend. Uses MySQL as the database. Don't forget to call your loved ones.
+
 ## Starting
 ```bash
 docker pull mysql:latest
@@ -9,4 +11,15 @@ docker run --name mysql-server -e MYSQL_ROOT_USER=root -e MYSQL_ROOT_PASSWORD=pa
 ```bash
 docker exec -it mysql-server mysql -u root -p
 # enter password provided
+```
+
+## run go backend
+```bash
+go run main.go
+```
+
+## run angular frontend
+```bash
+cd angular-client
+ng serve
 ```
